@@ -3,13 +3,138 @@
 <head>
     <title>Scraper</title>
     <style>
-        body { width: 200px; text-align: center; font-family: Arial, sans-serif; }
-        button { margin-top: 20px; padding: 10px; cursor: pointer; }
+        body { 
+            width: 450px; 
+            height: 400px;
+            text-align: center; 
+            font-family: Arial, sans-serif; 
+            background-color: #f6f5f5; /* Light grey background */
+            padding: 20px;
+            border-radius: 10px;
+            padding-top: 60px;
+        }
+        
+        .warning-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Spacing between boxes */
+            margin-bottom: 20px;
+        }
+
+        .warning-box {
+            width: 120px;
+            height: 120px;
+            background-color: white; /* White boxes */
+            border-radius: 15px; /* Rounded squares */
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align text to the top */
+            align-items: flex-start; /* Align text to the left */
+            font-weight: bold;
+            position: relative;
+            color: #838383;
+        }
+
+        .warning-box2 {
+            width: 420px;
+            height: 80px;
+            background-color: white; /* White boxes */
+            border-radius: 15px; /* Rounded squares */
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align text to the top */
+            align-items: flex-start; /* Align text to the left */
+            text-align: left;
+            font-weight: bold;
+            position: relative;
+            color: #363636;
+        }
+
+        button { 
+            margin-top: 20px; 
+            padding: 10px 15px; 
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+
+        .warning-box span {
+            color: black; /* Black numbers */
+            font-size: 25px;
+            margin-top: 20px; /* Moves number slightly down */
+        }
+
+        .light span::after { content: " Flags"; }
+        .medium span::after { content: " Flags"; }
+        .critical span::after { content: " Flags"; }
+
+        .warning-box img {
+            margin-top: 10px; /* Space between number and image */
+            width: 120px; /* Image width */
+            object-fit: contain;
+        }
+
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            position: fixed;
+            top: 20px;   /* Space from the top */
+            right: 30px;  /* Shift from the right (20px left from where it was originally) */
+            cursor: pointer;
+            margin-left: 0;  /* Remove the left margin */
+        }
+
     </style>
 </head>
 <body>
-    <h3>Web Scraper</h3>
-    <button id="scrapeBtn">Scrape & Download</button>
+    <img src="Images/Settings2.jpg" alt="Profile Picture" class="profile-pic">
+
+    <div class="warning-container">
+        <div class="warning-box light">
+            Light Warning:
+            <span id="lightCount">0</span>
+            <img src="Images/Light.png" alt="Critical Warning Icon">
+        </div>
+        <div class="warning-box medium">
+            Medium Warning:
+            <span id="mediumCount">1</span>
+            <img src="Images/Medium.png" alt="Critical Warning Icon">
+        </div>
+        <div class="warning-box critical">
+            Critical Warning:
+            <span id="criticalCount">0</span>
+            <img src="Images/Critical.png" alt="Critical Warning Icon">
+        </div>
+    </div>
+
+    <div class="warning-container">
+        <div class="warning-box2 light">
+            Reasoning for the Flag
+            <p>This flag was triggered because it appears that the content or submission may not be original and could violate academic integrity policies, and you will not gain an understanding.</p>
+        </div>
+    </div>
+
+    <div class="warning-container">
+        <div class="warning-box2 light">
+            Suggested Prompt
+            <p>Could you please help me understand the first step to solve x^2 + 4x = 0 true? </p>
+        </div>
+    </div>
+
+
+    <!-- <button id="scrapeBtn">Scrape & Download</button> -->
     <script src="popup.js"></script>
+
 </body>
 </html>

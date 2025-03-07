@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Add FontAwesome for the back icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Style for the body */
+        body { 
+            width: 465px; 
+            height: 420px;
+            text-align: center; 
+            font-family: Arial, sans-serif; 
+            background-color: #f6f5f5; 
+            padding: 20px;
+            border-radius: 10px;
+            padding-top: 60px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Style for the login container */
+        .login-container {
+            width: 400px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: -20px; 
+            box-sizing: border-box;
+        }
+
+        /* Style for the inputs */
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Style for the buttons */
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: rgb(149, 149, 149);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+
+        .button:hover {
+            background-color: #33bb65; /* Color on hover */
+        }
+
+
+        /* Style for the back button (icon on the left) */
+        .back-button {
+            margin-left: 20px;
+            position: absolute;
+            top: 20px;
+            font-size: 24px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0; /* Remove padding */
+            color: #333; /* Default color */
+            transition: color 0.3s ease; /* Smooth color transition */
+        }
+
+        .back-button:hover {
+            color: #007bff; /* Color on hover */
+        }
+
+        /* Style for the sign up link */
+        .signup-link {
+            text-decoration: none;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Back button with an icon on the left -->
+    <button class="back-button" id="backButton">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <div class="login-container">
+        <input type="text" placeholder="Username" id="username">
+        <input type="password" placeholder="Password" id="password">
+        <button class="button" onclick="submitLogin()">Log In</button>
+        <br>
+        <a href="signup.html" class="signup-link">Don't have an account? Sign up here.</a>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
