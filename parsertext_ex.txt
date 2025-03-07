@@ -1,0 +1,56 @@
+Chat history
+ChatGPT
+ChatGPT
+Sora
+Explore GPTs
+Projects
+New project
+Today
+Test acknowledged
+Chrome extension web scraper
+Example request clarification
+Example clarification request
+Hello and greeting
+Yesterday
+SSE Request Pending Issue
+SSE star display issue
+IntelliJ Google Java Format
+New chat
+JMock Proxy Error Fix
+Mocking ForecastResponse Interface
+Mocking ForecastResponse Issue
+Testing Forecast Service
+Mocking Concrete Classes JMock
+307 Redirect Explanation
+Azurite container unhealthy fix
+Previous 7 Days
+Docker Uvicorn Configuration Fix
+New chat
+Astro Social Favicon
+HashMap Test for ForecastQuery
+SSE Star Message Bug
+Favicon design for stars
+Modifying globals safely
+Star Visualization Setup
+SSE Implementation Fix
+Add Panning to Canvas
+Event listeners in modules
+Global Functions in JS
+View plans
+Unlimited access, team features, and more
+ChatGPT 4o
+Share
+PLUS
+PLUS
+You said:
+This is a test :3
+ChatGPT said:
+
+Test received! ✅ What's up? 😃
+
+4o
+
+Search
+Deep research
+ChatGPT can make mistakes. Check important info.
+?
