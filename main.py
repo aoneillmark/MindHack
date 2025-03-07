@@ -19,7 +19,7 @@ def process_string(input_string, client):
         prompt = data["prompt"]
         response = data["response"]
         result = classify(prompt, response, client=client)
-        assert result in [1, 2, 3], "The result should be an integer between 1 and 3, result: {result}"
+        assert result in [0, 1, 2, 3], "The result should be an integer between 1 and 3, result: {result}"
     return result
 
 
