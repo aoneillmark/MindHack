@@ -1,0 +1,5 @@
+<script>start("/Users/mylofarman/Documents/3-Projects/Hackathon/MindHack/extension/images/");</script>
+<script>onHasParentDirectory();</script>
+<script>addRow("Critical.png","Critical.png",0,196024,"191 kB",1741350775,"07/03/2025, 12:32:55");</script>
+<script>addRow("Light.png","Light.png",0,283986,"277 kB",1741350798,"07/03/2025, 12:33:18");</script>
+<script>addRow("Medium.png","Medium.png",0,208287,"203 kB",1741350785,"07/03/2025, 12:33:05");</script>
