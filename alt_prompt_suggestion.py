@@ -18,21 +18,20 @@ You are assessing risk to children and young people using a LM. We are looking f
 - Children forming emotional relationships with the LM
 - Children sharing personal information
 
-Read the prompt written by the child and the response from the LM. 
-If the prompt or response is harmful or inappropriate suggest an alternative prompt for the child to ask which is on a similar topic but is safe for children. If the content of the prompt is extremely harmful and there is no way to generate a safe version of the prompt return. "You should not ask the AI questions like this."
+Read the prompt written by the child. 
+If the prompt is harmful or inappropriate suggest an alternative question for the child to ask which is on a similar topic but is safe for children. If the content of the prompt is extremely harmful and there is no way to generate a safe version of the prompt return. "You should not ask the AI questions like this."
 """
 
 def alternative_prompt(prompt, response, client):
     # 
-    user_data = "\n".join(["Prompt to assess:", prompt, "Response to assess:", response])
-    alt_generated_prompt = default_prompt + user_data + """\nReturn an alternative prompt, do not return any other information, only return a short prompt."""
+    user_data = "\n".join(["Prompt to assess:", prompt])
+    alt_generated_prompt = default_prompt + user_data + """\nReturn an alternative question which the child could ask, do not return any other information, only return a short alternative prompt."""
     
     classification = classify(prompt, response, client=client)
     if classification == 0:
         return "No changes needed :)"
     else:
         # Generate content
-        # print(alt_generated_prompt)
         reply = get_reply(alt_generated_prompt, client=client, verbose=False)  # Changed to classifier_prompt and verbose to false
         return reply
     

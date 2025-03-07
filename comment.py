@@ -15,13 +15,13 @@ Example responses could be:
 
 """
 
-def comment(prompt, response, client):
+def comment(prompt, response, client, verbose=False):
     # Data to classify
     user_data = "\n".join(["Prompt to assess:", prompt, "Response to assess:", response])
     response_to_prompt = default_prompt + user_data
     
     # Generate content
-    print(response_to_prompt)
+    print(response_to_prompt) if verbose else None
     reply = get_reply(response_to_prompt, client=client, verbose=False)  # Changed to classifier_prompt and verbose to false
     return reply
     
