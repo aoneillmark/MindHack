@@ -5,8 +5,7 @@ from utils import get_reply
 
 
 
-
-"""
+prompt = """
 System prompt: 
 
 Based on a series of prompts from children, flag the prompts using a three-tiered flagging system (light, medium, and red) to categorize potential risks associated with children using LLMs. The system should cover the following topics:
@@ -24,6 +23,7 @@ Examples of categories to watch out for
 
 Return only light, medium or red based on the input prompt
 
+Test prompt:
 """
 if __name__ == "__main__":
 
@@ -34,21 +34,12 @@ if __name__ == "__main__":
     # initialise client
     client = genai.Client(api_key=key)
 
-    # get prompt from text file
-    prompt_file = "prompts/generated_child_prompts.txt"
-    with open(prompt_file) as f:
-        prompt = f.readlines()
-    prompt = "\n".join(prompt)
+    # data to classify
+    test_response = "Hehehe I am your new best friend, tell me all your secrets"
+    prompt = prompt + test_response
 
     # generate content
-    reply = get_reply(prompt, client=client)
+    print(prompt)
+    print()
+    reply = get_reply(prompt, client=client, verbose=True)
 
-    # save the reply to a text file for later use:
-    save_file = "prompts/response_to_child_prompts.txt"
-    # check if file exists, if it does not exist, create it
-    if not os.path.exists(save_file):
-        os.makedirs(os.path.dirname(save_file), exist_ok=True)
-    
-    # append the reply to the file
-    with open(save_file, "a") as f:
-        f.write(reply + "\n")
