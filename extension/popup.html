@@ -5,6 +5,7 @@
     <style>
         body { 
             width: 450px; 
+            height: 400px;
             text-align: center; 
             font-family: Arial, sans-serif; 
             background-color: #f6f5f5; /* Light grey background */
@@ -89,14 +90,15 @@
             border-radius: 50%;
             position: fixed;
             top: 20px;   /* Space from the top */
-            right: 20px;
+            right: 30px;  /* Shift from the right (20px left from where it was originally) */
             cursor: pointer;
+            margin-left: 0;  /* Remove the left margin */
         }
 
     </style>
 </head>
 <body>
-    <img src="profile.jpg" alt="Profile Picture" class="profile-pic">
+    <img src="Images/Settings2.jpg" alt="Profile Picture" class="profile-pic">
 
     <div class="warning-container">
         <div class="warning-box light">
@@ -106,12 +108,12 @@
         </div>
         <div class="warning-box medium">
             Medium Warning:
-            <span id="mediumCount">0</span>
+            <span id="mediumCount">1</span>
             <img src="Images/Medium.png" alt="Critical Warning Icon">
         </div>
         <div class="warning-box critical">
             Critical Warning:
-            <span id="criticalCount">200</span>
+            <span id="criticalCount">0</span>
             <img src="Images/Critical.png" alt="Critical Warning Icon">
         </div>
     </div>
@@ -119,19 +121,19 @@
     <div class="warning-container">
         <div class="warning-box2 light">
             Reasoning for the Flag
-            <p>This is where we provide the reasoning behind why this flag was triggered.</p>
+            <p>This flag was triggered because it appears that the content or submission may not be original and could violate academic integrity policies, and you will not gain an understanding.</p>
         </div>
     </div>
 
     <div class="warning-container">
         <div class="warning-box2 light">
-            Suggested Alternative
-            <p>Here we suggest an alternative solution or course of action.</p>
+            Suggested Prompt
+            <p>Could you please help me understand the first step to solve x^2 + 4x = 0 true? </p>
         </div>
     </div>
 
 
-    <button id="scrapeBtn">Scrape & Download</button>
+    <!-- <button id="scrapeBtn">Scrape & Download</button> -->
     <script src="popup.js"></script>
 
 </body>

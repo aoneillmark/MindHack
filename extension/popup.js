@@ -7,6 +7,7 @@ chrome.action.onClicked.addListener(() => {
     });
   });
 
+/*
 document.getElementById("scrapeBtn").addEventListener("click", () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.scripting.executeScript({
@@ -15,7 +16,7 @@ document.getElementById("scrapeBtn").addEventListener("click", () => {
         });
     });
 });
-
+*/
 function scrapeAndDownload() {
     let text = document.body.innerText;
     let blob = new Blob([text], { type: "text/plain" });
