@@ -13,7 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 # ----------------------
 DATABASE_URL = "sqlite:///./scraped_data.db"
 # Where is our Auth Microservice located?
-AUTH_SERVICE_URL = "http://127.0.0.1:8001/auth/validate"
+AUTH_SERVICE_URL = "https://auth-microservice-331868794273.europe-west1.run.app/auth/validate"
 
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
