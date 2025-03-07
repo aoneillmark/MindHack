@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+sqlalchemy
+passlib
+python-jose
+requests
+python-multipart
+bcrypt
