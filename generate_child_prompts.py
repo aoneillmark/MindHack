@@ -1,13 +1,7 @@
 from google import genai
 import os
 
-
-def get_reply(prompt, model="gemini-2.0-flash", verbose=False):
-    response = client.models.generate_content(model=model, contents=prompt)
-    if verbose:
-        print(response.text)
-    return response.text
-
+from utils import get_reply
 
 if __name__ == "__main__":
 
@@ -24,15 +18,17 @@ if __name__ == "__main__":
         prompt = f.readlines()
     prompt = "\n".join(prompt)
 
+
+
     # generate content
-    reply = get_reply(prompt)
+    reply = get_reply(prompt, client=client)
 
     # save the reply to a text file for later use:
     save_file = "prompts/generated_child_prompts.txt"
     # check if file exists, if it does not exist, create it
     if not os.path.exists(save_file):
         os.makedirs(os.path.dirname(save_file), exist_ok=True)
-
+    
     # append the reply to the file
     with open(save_file, "a") as f:
         f.write(reply + "\n")
