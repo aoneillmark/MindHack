@@ -32,22 +32,22 @@ def classify(prompt, response, client):
     classifier_prompt = default_prompt + user_data + """\n\nReturn a score from [0, 1, 2, 3] based on the input prompt. Do not return any other information."""
     
     # Generate content
-    print(classifier_prompt)
+    # print(classifier_prompt)
     reply = get_reply(classifier_prompt, client=client, verbose=False)  # Changed to classifier_prompt and verbose to false
     
     # Extract only the number from the response
     try:
         result = int(reply.strip())
-        print(result)
+        # print(result)
         
         # Check if the result is within the valid range
         if 0 <= result <= 3:
             return result
         else:
-            print("Received invalid score outside of range.")
+            # print("Received invalid score outside of range.")
             return None  # Return None if the result is out of range.
     except (ValueError, AttributeError):
-        print("Error: Response is not a valid integer.")
+        # print("Error: Response is not a valid integer.")
         return None  # Return None if the response is not a valid integer.
     
 if __name__ == "__main__":
