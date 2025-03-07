@@ -7,13 +7,14 @@ from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 
 from fastapi.middleware.cors import CORSMiddleware
+from determine_flag import determine_flag  # Import the function
 
 # ----------------------
 # CONFIG
 # ----------------------
 DATABASE_URL = "sqlite:///./scraped_data.db"
-# Where is our Auth Microservice located?
 AUTH_SERVICE_URL = "https://auth-microservice-331868794273.europe-west1.run.app/auth/validate"
+# AUTH_SERVICE_URL = "http://127.0.0.1:8001/auth/validate"  # Change to local URL for testing
 
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -29,6 +30,7 @@ class ScrapedItem(Base):
     user_id = Column(Integer, index=True, nullable=False)
     filename = Column(String, index=True, nullable=True)
     content = Column(Text, nullable=False)
+    flag = Column(Integer, default=0, nullable=False)  # Add flag column
 
 Base.metadata.create_all(bind=engine)
 
@@ -45,11 +47,11 @@ class ScrapedItemCreate(ScrapedItemBase):
 class ScrapedItemRead(ScrapedItemBase):
     id: int
     user_id: int
+    flag: int  # Include flag in API response
 
     class Config:
         orm_mode = True
 
-# This schema will represent the user info
 class UserRead(BaseModel):
     id: int
     email: str
@@ -59,15 +61,13 @@ class UserRead(BaseModel):
 # ----------------------
 app = FastAPI(title="Scraped Data Microservice")
 
-# Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Change this to your frontend domain for security
+    allow_origins=["*"],  
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all HTTP methods (POST, GET, etc.)
-    allow_headers=["*"],  # Allow all headers (Authorization, Content-Type, etc.)
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
-
 
 def get_db():
     db = SessionLocal()
@@ -77,10 +77,6 @@ def get_db():
         db.close()
 
 def get_current_user(request: Request) -> UserRead:
-    """
-    Reads 'Authorization' header, calls Auth Microservice to validate token.
-    Returns a `UserRead` object if valid, or raises HTTPException(401).
-    """
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
         raise HTTPException(
@@ -89,7 +85,6 @@ def get_current_user(request: Request) -> UserRead:
         )
 
     try:
-        # Make a request to the Auth Microservice for validation
         response = requests.post(
             AUTH_SERVICE_URL,
             headers={"Authorization": auth_header},
@@ -124,11 +119,15 @@ def create_scraped_data(
 ):
     """
     Create a new scraped data entry for the authenticated user.
+    Automatically determine the flag based on content.
     """
+    flag_value = determine_flag(item.content)  # Call determine_flag
+
     db_item = ScrapedItem(
         user_id=current_user.id,
         filename=item.filename,
-        content=item.content
+        content=item.content,
+        flag=flag_value  # Store flag
     )
     db.add(db_item)
     db.commit()
@@ -162,8 +161,8 @@ def get_scraped_data_by_id(
         raise HTTPException(status_code=403, detail="Not authorized for this item")
     return db_item
 
-# -----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 #                               MAIN ENTRY POINT
-# -----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 if __name__ == "__main__":
     uvicorn.run("scraped_data_microservice:app", host="127.0.0.1", port=8002, reload=True)

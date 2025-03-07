@@ -9,7 +9,7 @@ COPY . /app
 
 # Install dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir fastapi uvicorn sqlalchemy pydantic requests
+    pip install --no-cache-dir fastapi uvicorn sqlalchemy pydantic requests google-genai
 
 # Expose the port FastAPI will run on
 EXPOSE 8002
