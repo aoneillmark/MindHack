@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Web Scraper",
+  "version": "1.0",
+  "description": "Scrape text from a website and save it as a .txt file.",
+  "permissions": ["activeTab", "downloads", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
