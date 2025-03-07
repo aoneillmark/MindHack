@@ -10,6 +10,7 @@ from passlib.context import CryptContext
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 
+from fastapi.middleware.cors import CORSMiddleware
 # -----------------------------------------------------------------------------
 #                           CONFIG & DATABASE SETUP
 # -----------------------------------------------------------------------------
@@ -95,6 +96,15 @@ def decode_token(token: str) -> int:
 #                           FASTAPI INIT & DEPENDENCIES
 # -----------------------------------------------------------------------------
 app = FastAPI(title="Auth Microservice")
+
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Change this to your frontend domain for security
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 def get_db():
     db = SessionLocal()

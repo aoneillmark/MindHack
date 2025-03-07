@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraped Data Viewer</title>
+</head>
+<body>
+    <h1>Scraped Data Microservice</h1>
+
+    <h2>Sign Up</h2>
+    <input type="email" id="signup-email" placeholder="Email">
+    <input type="password" id="signup-password" placeholder="Password">
+    <button onclick="signup()">Sign Up</button>
+
+    <h2>Log In</h2>
+    <input type="email" id="login-email" placeholder="Email">
+    <input type="password" id="login-password" placeholder="Password">
+    <button onclick="login()">Log In</button>
+    <p id="token-display"></p>
+
+    <h2>Add Scraped Data</h2>
+    <input type="text" id="scraped-filename" placeholder="Filename">
+    <textarea id="scraped-content" placeholder="Scraped Content"></textarea>
+    <button onclick="submitScrapedData()">Submit</button>
+
+    <h2>Fetched Data</h2>
+    <button onclick="fetchScrapedData()">Get My Scraped Data</button>
+    <pre id="output"></pre>
+
+    <script>
+        let token = "";
+
+        async function signup() {
+            const email = document.getElementById("signup-email").value;
+            const password = document.getElementById("signup-password").value;
+            const response = await fetch("http://127.0.0.1:8001/auth/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+            const result = await response.json();
+            alert("User created: " + JSON.stringify(result));
+        }
+
+        async function login() {
+            const email = document.getElementById("login-email").value;
+            const password = document.getElementById("login-password").value;
+
+            const formData = new URLSearchParams();
+            formData.append("username", email);
+            formData.append("password", password);
+
+            const response = await fetch("http://127.0.0.1:8001/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: formData
+            });
+
+            const result = await response.json();
+            token = result.access_token;
+            document.getElementById("token-display").textContent = "Token: " + token;
+        }
+
+        async function submitScrapedData() {
+            const filename = document.getElementById("scraped-filename").value;
+            const content = document.getElementById("scraped-content").value;
+
+            const response = await fetch("http://127.0.0.1:8002/scraped_data", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify({ filename, content })
+            });
+
+            const result = await response.json();
+            alert("Scraped Data Added: " + JSON.stringify(result));
+        }
+
+        async function fetchScrapedData() {
+            const response = await fetch("http://127.0.0.1:8002/scraped_data", {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            });
+
+            const result = await response.json();
+            document.getElementById("output").textContent = JSON.stringify(result, null, 2);
+        }
+    </script>
+</body>
+</html>

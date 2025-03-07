@@ -6,6 +6,8 @@ from typing import Optional, List
 from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 
+from fastapi.middleware.cors import CORSMiddleware
+
 # ----------------------
 # CONFIG
 # ----------------------
@@ -56,6 +58,16 @@ class UserRead(BaseModel):
 # FASTAPI INIT & DEPENDENCIES
 # ----------------------
 app = FastAPI(title="Scraped Data Microservice")
+
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Change this to your frontend domain for security
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods (POST, GET, etc.)
+    allow_headers=["*"],  # Allow all headers (Authorization, Content-Type, etc.)
+)
+
 
 def get_db():
     db = SessionLocal()
